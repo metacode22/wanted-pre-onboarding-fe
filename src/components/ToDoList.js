@@ -7,11 +7,14 @@ import { useRef, useState } from 'react';
 const toDosUrl = '/todos';
 
 function ToDoList(props) {
+    const [errorMessage, setErrorMessage] = useState('');
+    
     return (
         <>
+            {errorMessage}
             {props.toDoList?.map((element) => {
                 return (
-                    <ToDoElement toDoList={props.toDoList} setToDoList={props.setToDoList} element={element} key={element.id}></ToDoElement>
+                    <ToDoElement setErrorMessage={setErrorMessage} toDoList={props.toDoList} setToDoList={props.setToDoList} element={element} key={element.id}></ToDoElement>
                 )
             })}
         </>
@@ -62,12 +65,29 @@ function ToDoElement(props) {
             setEditFlag(false);
         } catch (error) {
             console.log(error);
+            props.setErrorMessage(error.response.data.message[0])
         }
     }
     
     async function toggleIsCompleted(element) {
         try {
+            const response = await axios.put(toDosUrl + `/${element.id}`, {
+                todo: element.todo,
+                isCompleted: !element.isCompleted
+            }, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('userAccessToken')}`,
+                    'Content-Type': 'application/json'
+                }
+            })
             
+            const responseGetToDoList = await axios.get(toDosUrl, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('userAccessToken')}`
+                }
+            })
+            
+            props.setToDoList(responseGetToDoList.data.reverse());
         } catch (error) {
             console.log(error);
         }
