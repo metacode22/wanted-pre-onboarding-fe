@@ -2,7 +2,7 @@ import axios from '../apis/axios';
 import styles from './ToDoList.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle, faCircleCheck, faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 const toDosUrl = '/todos';
 
@@ -21,6 +21,8 @@ function ToDoList(props) {
 function ToDoElement(props) {
     const [editFlag, setEditFlag] = useState(false);
     
+    const updateInput = useRef();
+    
     async function deleteToDo(element) {
         try {
             const response = await axios.delete(toDosUrl + `/${element.id}`, {
@@ -38,11 +40,44 @@ function ToDoElement(props) {
         }
     }
     
+    async function updateToDo(element) {
+        try {
+            const response = await axios.put(toDosUrl + `/${element.id}`, {
+                todo: updateInput.current.value,
+                isCompleted: element.isCompleted
+            }, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('userAccessToken')}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            
+            const responseGetToDoList = await axios.get(toDosUrl, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('userAccessToken')}`
+                }
+            })
+            
+            props.setToDoList(responseGetToDoList.data.reverse());
+            setEditFlag(false);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    
+    async function toggleIsCompleted(element) {
+        try {
+            
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    
     return (
         <div className={styles.toDoElementWrap}>
             {props.element.isCompleted === true ?
-                <FontAwesomeIcon className={styles.circleCheck} icon={faCircleCheck}></FontAwesomeIcon>
-                : <FontAwesomeIcon className={styles.circle} icon={faCircle}></FontAwesomeIcon>
+                <FontAwesomeIcon className={styles.circleCheck} icon={faCircleCheck} onClick={() => toggleIsCompleted(props.element)}></FontAwesomeIcon>
+                : <FontAwesomeIcon className={styles.circle} icon={faCircle} onClick={() => toggleIsCompleted(props.element)}></FontAwesomeIcon>
             }
             
             {editFlag === false ? 
@@ -55,9 +90,13 @@ function ToDoElement(props) {
                 </>
                 :
                 <>
-                    <input className={styles.toDoTextInput}></input>
+                    <input className={styles.toDoTextInput} ref={updateInput} defaultValue={props.element.todo} onKeyUp={() => {
+                        if (window.event.keyCode === 13) {
+                            updateToDo(props.element);
+                        }
+                    }}></input>
                     <div className={styles.buttonsWrap}>
-                        <div className={styles.okButton}>ok</div>
+                        <div className={styles.okButton} onClick={() => updateToDo(props.element)}>ok</div>
                         <div className={styles.cancelButton} onClick={() => setEditFlag(false)}>cancel</div>
                     </div>
                 </>

@@ -73,6 +73,7 @@ function ToDo() {
     
     return (
         <section className={styles.wrap}>
+            <p>To Do</p>
             <div className={styles.addToDoWrap}>
                 <input className={styles.addToDoInput} ref={inputValue} onKeyUp={(event) => {
                     if (window.event.keyCode === 13) {
