@@ -1,0 +1,41 @@
+.toDoElementWrap {
+    width: 100%;
+    margin: 12px 0;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+    .circleCheck, .circle {
+        cursor: pointer;
+    }
+    
+    .toDoText {
+        width: 100%;
+        margin-left: 8px;
+        
+    }
+    
+    .toDoTextInput {
+        width: 100%;
+        margin-left: 8px;
+    }
+    
+    .buttonsWrap {
+        
+        
+        display: flex;
+    }
+    
+        .editButton, .deleteButton {
+            margin: 0 4px;
+            cursor: pointer;
+        }
+        
+        .okButton {
+            cursor: pointer;
+        }
+        
+        .cancelButton {
+            cursor: pointer;
+        }

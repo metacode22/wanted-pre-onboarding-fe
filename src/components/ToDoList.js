@@ -1,31 +1,68 @@
 import axios from '../apis/axios';
 import styles from './ToDoList.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircle, faCircleCheck, faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { useState } from 'react';
 
 const toDosUrl = '/todos';
 
 function ToDoList(props) {
-    console.log(props.toDoList);
-    
     return (
         <>
             {props.toDoList?.map((element) => {
                 return (
-                    <div style={{display: 'flex'}} key={element.id}>
-                        {/* isCompleted에 따라 */}
-                        <div>check 표시</div>
-                        
-                        {/* 수정 시 input으로 바뀌어야 함. element.todo라는 데이터는 input 안에 띄우면서 */}
-                        <div>{element.todo}</div>
-                        
-                        {/* 수정 시 ok 버튼으로 바뀌어야 함. */}
-                        <div>edit</div>
-                        
-                        {/* 수정 시 cancel 버튼으로 바뀌어야 함. */}
-                        <div>delete</div>
-                    </div>
+                    <ToDoElement toDoList={props.toDoList} setToDoList={props.setToDoList} element={element} key={element.id}></ToDoElement>
                 )
             })}
         </>
+    )
+}
+
+function ToDoElement(props) {
+    const [editFlag, setEditFlag] = useState(false);
+    
+    async function deleteToDo(element) {
+        try {
+            const response = await axios.delete(toDosUrl + `/${element.id}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('userAccessToken')}`
+                }
+            })
+            
+            const newToDoList = [...props.toDoList];
+            const indexToDelete = newToDoList.findIndex(x => x.id === element.id);
+            newToDoList.splice(indexToDelete, 1);
+            props.setToDoList(newToDoList);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    
+    return (
+        <div className={styles.toDoElementWrap}>
+            {props.element.isCompleted === true ?
+                <FontAwesomeIcon className={styles.circleCheck} icon={faCircleCheck}></FontAwesomeIcon>
+                : <FontAwesomeIcon className={styles.circle} icon={faCircle}></FontAwesomeIcon>
+            }
+            
+            {editFlag === false ? 
+                <>
+                    <div className={styles.toDoText}>{props.element.todo}</div>
+                    <div className={styles.buttonsWrap}>
+                        <FontAwesomeIcon className={styles.editButton} icon={faPenToSquare} onClick={() => setEditFlag(true)}></FontAwesomeIcon>
+                        <FontAwesomeIcon className={styles.deleteButton} icon={faTrash} onClick={() => {deleteToDo(props.element)}}></FontAwesomeIcon>
+                    </div>
+                </>
+                :
+                <>
+                    <input className={styles.toDoTextInput}></input>
+                    <div className={styles.buttonsWrap}>
+                        <div className={styles.okButton}>ok</div>
+                        <div className={styles.cancelButton} onClick={() => setEditFlag(false)}>cancel</div>
+                    </div>
+                </>
+            }
+        </div>
     )
 }
 
