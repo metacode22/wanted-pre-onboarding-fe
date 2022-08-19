@@ -1,0 +1,96 @@
+.wrap {
+    background-color: #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 24px;
+    width: 50vw;
+    padding: 5%;
+    -webkit-box-shadow: 4px 3px 15px 0px rgba(0,0,0,0.25); 
+    box-shadow: 4px 3px 15px 0px rgba(0,0,0,0.25);
+    
+    display: flex;
+    flex-direction: column;
+}
+
+    .notice {
+        font-size: 12px;
+        text-align: center;
+        align-self: flex-start;
+    }
+    
+    .errorWrap {
+        width: 100%;
+        border-bottom: 1px solid #9B322D;
+        
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+        .errorMessageText {
+            font-weight: bold;
+            color: #9B322D;
+        }
+    
+        .errorMessageDeleteButton {
+            color: #9B322D;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+        
+        .errorMessageDeleteButton:hover {
+            transform: scale3d(1.5, 1.5, 1.5);
+        }
+    
+    .registerForm {   
+        display: flex;
+        flex-direction: column;
+    }
+    
+        .emailInput, .passwordInput, .confirmPasswordInput {
+            all: unset;
+            border: 1px solid #E2E5E6;
+            border-radius: 24px;
+            height: 3em;
+            padding-left: 12px;
+            -webkit-box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.07); 
+            box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.07);
+        }
+        
+        .emailInput:focus, .passwordInput:focus, .confirmPasswordInput:focus {
+            outline: 2px solid green;
+        }
+        
+        .buttonsWrap {
+            display: flex;
+        }
+        
+            .registerButton, .backToLoginPageButton {
+                all: unset;    
+                width: 100%;
+                text-align: center;
+                cursor: pointer;
+                background-color: yellowgreen;
+                height: 2em;
+                border-radius: 8px;
+                transition: all 0.25s;
+                color: rgb(65, 65, 65);
+            }
+            
+            .registerButton {
+                margin-right: 8px;
+            }
+            
+            .backToLoginPageButton {
+                margin-left: 8px;
+            }
+            
+            .registerButton:hover, .backToLoginPageButton:hover {
+                opacity: 0.8;
+            }
+            
+    .registerForm > * {
+        margin: 12px 0;
+    }

@@ -45,7 +45,8 @@
         .addToDoButton {
             height: 100%;
             cursor: pointer;
-            color: green
+            color: green;
+            transition: all 0.25s;
         }
         
         .addToDoButton:hover {
@@ -59,9 +60,12 @@
     }
     
     .toDoListWrap::-webkit-scrollbar {
-        
+        width: 6px;
+        background-color: transparent;
     }
     
     .toDoListWrap::-webkit-scrollbar-thumb {
-        
+        width: 6px;
+        background-color: yellowgreen;
+        border-radius: 16px;
     }

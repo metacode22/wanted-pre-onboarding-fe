@@ -18,10 +18,10 @@ function ToDo() {
     useEffect(() => {
         if (localStorage.getItem('userAccessToken') === null) {
             navigate('/');
+        } else {
+            inputRef.current.focus();
+            getToDoList();
         }
-        
-        inputRef.current.focus();
-        getToDoList();
     }, [])
     
     async function handleSubmitByEnterKey(event) {

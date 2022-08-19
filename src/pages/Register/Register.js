@@ -1,7 +1,9 @@
 import axios from '../../apis/axios';
+import styles from './Register.module.css';
 import { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './Register.module.css';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const registerUrl = '/auth/signup';
 
@@ -28,12 +30,14 @@ function Register() {
     }, [])
     
     useEffect(() => {
-        if (emailValue.includes('@') && passwordValue.length >= 8) {
+        if (emailValue.includes('@') && passwordValue.length >= 8 && confirmPasswordValue.length >= 8) {
             submitRef.current.disabled = false;
+            submitRef.current.style.opacity = 1.0;
         } else {
             submitRef.current.disabled = true;
+            submitRef.current.style.opacity = 0.5;
         }
-    }, [emailValue, passwordValue])
+    }, [emailValue, passwordValue, confirmPasswordValue])
     
     async function handleSubmit(event) {
         event.preventDefault();
@@ -70,16 +74,20 @@ function Register() {
                 navigate('/todo');
             }
         } catch (error) {
+            console.log(error);
             setErrorMessage(error.response.data.message);
         }
     }
     
     return (
         <section className={styles.wrap}>
-            <p>이메일은 @을 포함해서, 비밀번호는 8자 이상으로 입력해주시기 바랍니다.</p>
+            <p className={styles.notice}>* 이메일은 @을 포함해서, 비밀번호는 8자 이상으로 입력해주시기 바랍니다.</p>
             {errorMessage === '' ? 
             null :
-            <p>{errorMessage}</p>
+            <div className={styles.errorWrap}>
+                <p className={styles.errorMessageText}>❗️ {errorMessage}</p>
+                <FontAwesomeIcon className={styles.errorMessageDeleteButton} icon={faXmark} onClick={() => setErrorMessage('')}></FontAwesomeIcon>
+            </div>
             }
             <h1>Register</h1>
             <form className={styles.registerForm} onSubmit={(event) => {handleSubmit(event)}}>
@@ -114,13 +122,16 @@ function Register() {
                     placeholder='비밀번호를 재확인해주세요.'
                     required
                 ></input>
-                <input 
-                    type='submit'
-                    ref={submitRef}
-                    value='Register'
-                ></input>
+                <div className={styles.buttonsWrap}>
+                    <input 
+                        type='submit'
+                        className={styles.registerButton}
+                        ref={submitRef}
+                        value='Register'
+                    ></input>
+                    <button type='button' className={styles.backToLoginPageButton} onClick={() => {navigate('/')}}>Back to Login page</button>
+                </div>
             </form>
-            <button type='button' onClick={() => {navigate('/')}}>Back to Login page</button>
         </section>
     )
 }
