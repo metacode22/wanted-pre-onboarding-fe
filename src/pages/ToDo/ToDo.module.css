@@ -12,6 +12,33 @@
     flex-direction: column;
     align-items: center;
 }
+
+    .errorWrap {
+        width: 100%;
+        border-bottom: 1px solid #9B322D;
+        
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+        .errorMessageText {
+            font-weight: bold;
+            color: #9B322D;
+        }
+
+        .errorMessageDeleteButton {
+            color: #9B322D;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+        
+        .errorMessageDeleteButton:hover {
+            transform: scale3d(1.5, 1.5, 1.5);
+        }
     
     .toDoTitle {
         align-self: flex-start;

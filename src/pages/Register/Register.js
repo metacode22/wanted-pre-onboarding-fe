@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const registerUrl = '/auth/signup';
 
+
 function Register() {
     const [emailValue, setEmailValue] = useState('');
     const [passwordValue, setPasswordValue] = useState('');
@@ -74,8 +75,8 @@ function Register() {
                 navigate('/todo');
             }
         } catch (error) {
-            console.log(error);
             setErrorMessage(error.response.data.message);
+            emailRef.current.focus();
         }
     }
     

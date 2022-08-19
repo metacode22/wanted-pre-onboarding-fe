@@ -7,14 +7,11 @@ import { useEffect, useRef, useState } from 'react';
 const toDosUrl = '/todos';
 
 function ToDoList(props) {
-    const [errorMessage, setErrorMessage] = useState('');
-    
     return (
         <>
-            {errorMessage}
             {props.toDoList?.map((element) => {
                 return (
-                    <ToDoElement setErrorMessage={setErrorMessage} toDoList={props.toDoList} setToDoList={props.setToDoList} element={element} key={element.id}></ToDoElement>
+                    <ToDoElement toDoList={props.toDoList} setToDoList={props.setToDoList} element={element} key={element.id}></ToDoElement>
                 )
             })}
         </>
@@ -23,6 +20,7 @@ function ToDoList(props) {
 
 function ToDoElement(props) {
     const [editFlag, setEditFlag] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
     
     const updateInput = useRef();
     
@@ -45,7 +43,7 @@ function ToDoElement(props) {
             newToDoList.splice(indexToDelete, 1);
             props.setToDoList(newToDoList);
         } catch (error) {
-            console.log(error);
+            setErrorMessage(error.response.data.message);
         }
     }
     
@@ -70,8 +68,19 @@ function ToDoElement(props) {
             props.setToDoList(responseGetToDoList.data.reverse());
             setEditFlag(false);
         } catch (error) {
-            console.log(error);
-            props.setErrorMessage(error.response.data.message[0])
+            if (error.response.data.message[0] === 'todo should not be empty') {
+                setErrorMessage('빈 칸을 채워주시기 바랍니다.');
+                updateInput.current.focus();
+            } else {
+                // message가 여러개 올 수도 있을 것 같은데 어떤 경우인지 모르겠다.
+                let totalErrorMessage = '';
+                
+                error.response.data.message.forEach((element) => {
+                    totalErrorMessage += `${element}\n`;
+                })
+                
+                setErrorMessage(totalErrorMessage);
+            }
         }
     }
     
@@ -95,40 +104,53 @@ function ToDoElement(props) {
             
             props.setToDoList(responseGetToDoList.data.reverse());
         } catch (error) {
-            console.log(error);
+            setErrorMessage(error.response.data.message);
         }
     }
     
     return (
-        <div className={styles.toDoElementWrap}>
-            {props.element.isCompleted === true ?
-                <FontAwesomeIcon className={styles.circleCheck} icon={faCircleCheck} onClick={() => toggleIsCompleted(props.element)}></FontAwesomeIcon>
-                : <FontAwesomeIcon className={styles.circle} icon={faCircle} onClick={() => toggleIsCompleted(props.element)}></FontAwesomeIcon>
-            }
-            
-            {editFlag === false ? 
-                <>
-                    <div className={styles.toDoText}>{props.element.todo}</div>
-                    <div className={styles.buttonsWrap}>
-                        <FontAwesomeIcon className={styles.editButton} icon={faPenToSquare} onClick={() => {setEditFlag(true)}}></FontAwesomeIcon>
-                        <FontAwesomeIcon className={styles.deleteButton} icon={faTrash} onClick={() => {deleteToDo(props.element)}}></FontAwesomeIcon>
-                    </div>
-                </>
-                :
-                <>
-                    <input className={styles.toDoTextInput} ref={updateInput} defaultValue={props.element.todo} onKeyUp={() => {
-                        if (window.event.keyCode === 13) {
-                            updateToDo(props.element);
-                        }
-                    }}></input>
-                    <div className={styles.buttonsWrap}>
-                        {/* <div className={styles.okButton} onClick={() => updateToDo(props.element)}>수</div> */}
-                        <FontAwesomeIcon className={styles.okButton} icon={faCheck} onClick={() => updateToDo(props.element)}></FontAwesomeIcon>
-                        <FontAwesomeIcon className={styles.cancelButton} icon={faXmark} onClick={() => setEditFlag(false)}></FontAwesomeIcon>
-                    </div>
-                </>
-            }
-        </div>
+        <>
+            <div className={styles.toDoElementWrap}>
+                {props.element.isCompleted === true ?
+                    <FontAwesomeIcon className={styles.circleCheck} icon={faCircleCheck} onClick={() => toggleIsCompleted(props.element)}></FontAwesomeIcon>
+                    : <FontAwesomeIcon className={styles.circle} icon={faCircle} onClick={() => toggleIsCompleted(props.element)}></FontAwesomeIcon>
+                }
+                
+                {editFlag === false ? 
+                    <>
+                        <div className={styles.toDoText}>{props.element.todo}</div>
+                        <div className={styles.buttonsWrap}>
+                            <FontAwesomeIcon className={styles.editButton} icon={faPenToSquare} onClick={() => {setEditFlag(true)}}></FontAwesomeIcon>
+                            <FontAwesomeIcon className={styles.deleteButton} icon={faTrash} onClick={() => {deleteToDo(props.element)}}></FontAwesomeIcon>
+                        </div>
+                    </>
+                    :
+                    <>
+                        <input className={styles.toDoTextInput} ref={updateInput} defaultValue={props.element.todo} onKeyUp={() => {
+                            if (window.event.keyCode === 13) {
+                                updateToDo(props.element);
+                            }
+                        }}></input>
+                        <div className={styles.buttonsWrap}>
+                            <FontAwesomeIcon className={styles.okButton} icon={faCheck} onClick={() => updateToDo(props.element)}></FontAwesomeIcon>
+                            <FontAwesomeIcon className={styles.cancelButton} icon={faXmark} onClick={() => {
+                                setErrorMessage('');
+                                setEditFlag(false)
+                            }}></FontAwesomeIcon>
+                        </div>
+                    </>
+                }
+            </div>
+            <div>
+                {errorMessage === '' ? 
+                null :
+                <div className={styles.errorWrap}>
+                    <p className={styles.errorMessageText}>❗️ {errorMessage}</p>
+                    <FontAwesomeIcon className={styles.errorMessageDeleteButton} icon={faXmark} onClick={() => setErrorMessage('')}></FontAwesomeIcon>
+                </div>
+                }
+            </div>
+        </>
     )
 }
 
