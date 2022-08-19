@@ -1,3 +1,7 @@
+body {
+    background-color: #DDDDDD;
+}
+
 .wrap {
     position: absolute;
     top: 50%;

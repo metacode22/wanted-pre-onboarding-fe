@@ -11,7 +11,7 @@ const toDosUrl = '/todos';
 function ToDo() {
     const [toDoList, setToDoList] = useState([]);
     
-    const inputValue = useRef();
+    const inputRef = useRef();
     
     const navigate = useNavigate();
     
@@ -44,14 +44,17 @@ function ToDo() {
     
     async function handleSubmitByAddButtonClick() {
         try {
-            const response = await axios.get(toDosUrl, {
-                todo: inputValue.current.value
+            const response = await axios.post(toDosUrl, {
+                todo: inputRef.current.value
             }, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('userAccessToken')}`,
                     'Content-Type': 'application/json'
                 }
             })
+            
+            setToDoList([response.data, ... toDoList]);
+            inputRef.current.value = null;
         } catch (error) {
             console.log(error);
         }
@@ -73,9 +76,9 @@ function ToDo() {
     
     return (
         <section className={styles.wrap}>
-            <p>To Do</p>
+            <h1 className={styles.toDoTitle}>To Do</h1>
             <div className={styles.addToDoWrap}>
-                <input className={styles.addToDoInput} ref={inputValue} onKeyUp={(event) => {
+                <input className={styles.addToDoInput} ref={inputRef} onKeyUp={(event) => {
                     if (window.event.keyCode === 13) {
                         handleSubmitByEnterKey(event);
                     }
