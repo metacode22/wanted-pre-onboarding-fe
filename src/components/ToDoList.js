@@ -1,8 +1,8 @@
 import axios from '../apis/axios';
 import styles from './ToDoList.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircle, faCircleCheck, faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { useRef, useState } from 'react';
+import { faCheck, faCircle, faCircleCheck, faPenToSquare, faTrash, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { useEffect, useRef, useState } from 'react';
 
 const toDosUrl = '/todos';
 
@@ -25,6 +25,12 @@ function ToDoElement(props) {
     const [editFlag, setEditFlag] = useState(false);
     
     const updateInput = useRef();
+    
+    useEffect(() => {
+        if (editFlag) {
+            updateInput.current.focus();
+        }
+    }, [editFlag])
     
     async function deleteToDo(element) {
         try {
@@ -104,7 +110,7 @@ function ToDoElement(props) {
                 <>
                     <div className={styles.toDoText}>{props.element.todo}</div>
                     <div className={styles.buttonsWrap}>
-                        <FontAwesomeIcon className={styles.editButton} icon={faPenToSquare} onClick={() => setEditFlag(true)}></FontAwesomeIcon>
+                        <FontAwesomeIcon className={styles.editButton} icon={faPenToSquare} onClick={() => {setEditFlag(true)}}></FontAwesomeIcon>
                         <FontAwesomeIcon className={styles.deleteButton} icon={faTrash} onClick={() => {deleteToDo(props.element)}}></FontAwesomeIcon>
                     </div>
                 </>
@@ -116,8 +122,9 @@ function ToDoElement(props) {
                         }
                     }}></input>
                     <div className={styles.buttonsWrap}>
-                        <div className={styles.okButton} onClick={() => updateToDo(props.element)}>ok</div>
-                        <div className={styles.cancelButton} onClick={() => setEditFlag(false)}>cancel</div>
+                        {/* <div className={styles.okButton} onClick={() => updateToDo(props.element)}>수</div> */}
+                        <FontAwesomeIcon className={styles.okButton} icon={faCheck} onClick={() => updateToDo(props.element)}></FontAwesomeIcon>
+                        <FontAwesomeIcon className={styles.cancelButton} icon={faXmark} onClick={() => setEditFlag(false)}></FontAwesomeIcon>
                     </div>
                 </>
             }

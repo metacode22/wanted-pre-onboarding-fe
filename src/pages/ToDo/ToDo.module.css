@@ -4,7 +4,7 @@
     border-radius: 24px;
     width: 50vw;
     height: 75vh;
-    padding: 10%;
+    padding: 5%;
     -webkit-box-shadow: 4px 3px 15px 0px rgba(0,0,0,0.25); 
     box-shadow: 4px 3px 15px 0px rgba(0,0,0,0.25);
     
@@ -18,7 +18,9 @@
     }
 
     .addToDoWrap {
+        height: 10%;
         width: 100%;
+        margin-bottom: 12px;
         
         display: flex;
         justify-content: space-between;
@@ -26,13 +28,40 @@
     }
 
         .addToDoInput {
+            all: unset;
             width: 75%;
+            border: 1px solid #E2E5E6;
+            border-radius: 24px;
+            height: 100%;
+            padding-left: 12px;
+            -webkit-box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.07); 
+            box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.07);
+        }
+        
+        .addToDoInput:focus {
+            outline: 2px solid green;
         }
         
         .addToDoButton {
+            height: 100%;
             cursor: pointer;
+            color: green
+        }
+        
+        .addToDoButton:hover {
+            opacity: 0.8;
         }
     
     .toDoListWrap {
         width: 100%;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+    
+    .toDoListWrap::-webkit-scrollbar {
+        
+    }
+    
+    .toDoListWrap::-webkit-scrollbar-thumb {
+        
     }

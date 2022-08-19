@@ -1,49 +1,62 @@
 .toDoElementWrap {
     width: 100%;
-    margin: 12px 0;
+    margin: 24px 0;
     
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
     .circleCheck, .circle {
+        border: 2px solid black;
+        border-radius: 50%;
         cursor: pointer;
     }
     
-    /* .circleCheck, .circle {
-        border-radius: 50%;
-        color: linear-gradient(green, yellowgreen);
-        background-color: white;
-    } */
+    .circle {
+        color: white;
+    }
     
-    .toDoText, .toDoTextInput {
+    .circle:hover {
+        color: #E2E5E6;
+    }
+    
+    .circleCheck:hover {
+        color: #E2E5E6;
+    }
+    
+    .toDoText {
         width: 100%;
-        margin-left: 8px;
-        
+        margin-left: 16px;
+    }
+    
+    .toDoTextInput {
+        all: unset;
+        border: 1px solid #E2E5E6;
+        border-radius: 12px;
+        padding-left: 12px;
+        width: 100%;
+        margin-left: 16px;
     }
     
     .buttonsWrap {
-        
-        
         display: flex;
     }
     
-        .editButton {
+        .editButton, .okButton {
             width: 16px;
             height: 16px;
             margin: 0 8px;
             cursor: pointer;
+            transition: all 0.25s;
         }
         
-        .deleteButton {
+        .deleteButton, .cancelButton {
             width: 16px;
+            height: 16px;
             cursor: pointer;
+            transition: all 0.25s;
         }
         
-        .okButton {
-            cursor: pointer;
-        }
-        
-        .cancelButton {
-            cursor: pointer;
+        .editButton:hover, .deleteButton:hover, .okButton:hover, .cancelButton:hover {
+            transform: scale3d(1.25, 1.25, 1.25);
         }

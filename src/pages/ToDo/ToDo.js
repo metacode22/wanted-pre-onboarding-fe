@@ -20,6 +20,7 @@ function ToDo() {
             navigate('/');
         }
         
+        inputRef.current.focus();
         getToDoList();
     }, [])
     
@@ -78,7 +79,7 @@ function ToDo() {
         <section className={styles.wrap}>
             <h1 className={styles.toDoTitle}>To Do</h1>
             <div className={styles.addToDoWrap}>
-                <input className={styles.addToDoInput} ref={inputRef} onKeyUp={(event) => {
+                <input className={styles.addToDoInput} placeholder='해야 할 일을 입력해주세요.' ref={inputRef} onKeyUp={(event) => {
                     if (window.event.keyCode === 13) {
                         handleSubmitByEnterKey(event);
                     }
