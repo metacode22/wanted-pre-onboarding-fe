@@ -13,6 +13,31 @@
     align-items: center;
 }
 
+    .header {
+        width: 100%;
+        
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+        
+        .logoutButton {
+            all: unset;  
+            font-weight: bold;  
+            padding: 8px;
+            text-align: center;
+            cursor: pointer;
+            background-color: yellowgreen;
+            height: 2em;
+            border-radius: 8px;
+            transition: all 0.25s;
+            color: rgb(65, 65, 65);
+        }
+        
+        .logoutButton:hover {
+            opacity: 0.8;
+        }
+
     .errorWrap {
         width: 100%;
         border-bottom: 1px solid #9B322D;

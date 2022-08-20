@@ -1,11 +1,19 @@
 .toDoElementWrap {
-    width: 100%;
-    margin: 24px 0;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    height: 2em;
+    padding: 12px;
+    /* margin: 12px; */
     
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
+.toDoElementWrap:hover {
+    border: 1px solid #E2E5E6;
+}
+
     .circleCheck, .circle {
         border: 2px solid black;
         border-radius: 50%;

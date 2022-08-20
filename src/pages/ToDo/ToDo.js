@@ -57,6 +57,7 @@ function ToDo() {
             
             setToDoList([response.data, ... toDoList]);
             inputRef.current.value = null;
+            inputRef.current.focus();
         } catch (error) {
             if (error.response.data.message[0] === 'todo should not be empty') {
                 setErrorMessage('빈 칸을 채워주시기 바랍니다.');
@@ -100,6 +101,11 @@ function ToDo() {
         }
     }
     
+    function logout() {
+        localStorage.removeItem('userAccessToken');
+        navigate('/');
+    }
+    
     return (
         <section className={styles.wrap}>
             {errorMessage === '' ? 
@@ -109,7 +115,10 @@ function ToDo() {
                     <FontAwesomeIcon className={styles.errorMessageDeleteButton} icon={faXmark} onClick={() => setErrorMessage('')}></FontAwesomeIcon>
                 </div>
             }
-            <h1 className={styles.toDoTitle}>To Do</h1>
+            <div className={styles.header}>
+                <h1 className={styles.toDoTitle}>To Do</h1>
+                <button className={styles.logoutButton} onClick={() => logout()}>Log Out</button>
+            </div>
             <div className={styles.addToDoWrap}>
                 <input className={styles.addToDoInput} placeholder='해야 할 일을 입력해주세요.' ref={inputRef} onKeyUp={(event) => {
                     if (window.event.keyCode === 13) {
