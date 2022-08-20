@@ -13,6 +13,7 @@ function Login() {
     const [errorMessage, setErrorMessage] = useState('');
     
     const emailRef = useRef();
+    const passwordRef = useRef();
     const submitRef = useRef();
     
     const navigate = useNavigate();
@@ -58,8 +59,10 @@ function Login() {
             }
         } catch (error) {
             if (error.response.data.message === 'Unauthorized') {
+                passwordRef.current.focus();
                 setErrorMessage('비밀번호를 재확인해주세요.');
             } else {
+                emailRef.current.focus();
                 setErrorMessage(error.response.data.message);   
             }
         }
@@ -93,6 +96,7 @@ function Login() {
                     type='password' 
                     className={styles.passwordInput} 
                     id='passwordInputId'
+                    ref={passwordRef}
                     onChange={(event) => {setPasswordValue(event.target.value)}}
                     placeholder='비밀번호를 입력해주세요.'
                     required

@@ -27,6 +27,7 @@ function ToDo() {
     
     async function handleSubmitByEnterKey(event) {
         event.preventDefault();
+
         try {
             const response = await axios.post(toDosUrl, {
                 todo: event.target.value
@@ -40,7 +41,11 @@ function ToDo() {
             setToDoList([response.data, ...toDoList]);
             event.target.value = null;
         } catch (error) {
-            setErrorMessage(error.response.data.message);
+            if (error.response.data.message[0] === 'todo should not be empty') {
+                setErrorMessage('빈 칸을 채워주시기 바랍니다.');
+            } else {
+                setErrorMessage(error.response.data.message);
+            }
         }
     }
     
@@ -120,7 +125,7 @@ function ToDo() {
                 <button className={styles.logoutButton} onClick={() => logout()}>Log Out</button>
             </div>
             <div className={styles.addToDoWrap}>
-                <input className={styles.addToDoInput} placeholder='해야 할 일을 입력해주세요.' ref={inputRef} onKeyUp={(event) => {
+                <input className={styles.addToDoInput} placeholder='해야 할 일을 입력해주세요.' ref={inputRef} onKeyPress={(event) => {
                     if (window.event.keyCode === 13) {
                         handleSubmitByEnterKey(event);
                     }

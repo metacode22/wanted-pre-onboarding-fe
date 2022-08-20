@@ -126,7 +126,7 @@ function ToDoElement(props) {
                     </>
                     :
                     <>
-                        <input className={styles.toDoTextInput} ref={updateInput} defaultValue={props.element.todo} onKeyUp={() => {
+                        <input className={styles.toDoTextInput} ref={updateInput} defaultValue={props.element.todo} onKeyPress={() => {
                             if (window.event.keyCode === 13) {
                                 updateToDo(props.element);
                             }
