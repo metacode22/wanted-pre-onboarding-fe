@@ -99,6 +99,23 @@
     
 <hr/>
 
+<br/>
+
 # 프로젝트 실행 방법
+해당 Repository 복사
+```
+git clone https://github.com/metacode22/wanted-pre-onboarding-fe.git
+```
+
+해당 폴더에서 패키지 설치
+
+```
+npm install
+```
+
+실행
+```
+npm start
+```
 
 
