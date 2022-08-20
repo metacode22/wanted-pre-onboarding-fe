@@ -1,70 +1,120 @@
-# Getting Started with Create React App
+# 과제 요구사항
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h3>:: 1. 로그인 / 회원가입</h3>
 
-## Available Scripts
+#### ☑ Assignment1
+- - [x] 이메일/비밀번호 유효성 검사
+  - - [x] 이메일 @ 포함
+  - - [x] 비밀번호 8자 이상
+  - - [x] 위 두 조건 만족 시 로그인/회원가입 버튼 활성화
+  - - [x] 테스트 이메일 사용
+  
+<br/>
 
-In the project directory, you can run:
+> 시연 - 회원가입
 
-### `npm start`
+<img src="https://user-images.githubusercontent.com/93233930/185748576-ce5e6e9b-e480-41b3-8087-9b918acfb4e6.gif"/>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<br/>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+> 시연 - 로그인
 
-### `npm test`
+<img src="https://user-images.githubusercontent.com/93233930/185748573-9bb7e4a7-44d6-4601-8011-57219d299e82.gif"/>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<br/>
 
-### `npm run build`
+#### ☑ Assignment2
+- - [x] 로그인 API 호출 후 올바른 응답 수신 시 ```/todo```로 이동
+  - - [x] 로그인 성공 후 응답 받은 JWT를 로컬 스토리지에 저장
+  
+<br/>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+> 시연
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<img src="https://user-images.githubusercontent.com/93233930/185748577-f79f66ee-61f7-4430-bb52-3662f1a8f913.gif"/>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<br/>
 
-### `npm run eject`
+#### ☑ Assignment3
+- - [x] 로그인 여부에 따른 리다이렉트 처리
+  - - [x] 로컬 스토리지에 토큰이 있는 상태로 ```/``` 페이지 접속 시 ```/todo``` 페이지로 리다이렉트
+  - - [x] 로컬 스토리지에 토큰이 없는 상태로 ```/todo``` 페이지 접속 시 ```/``` 페이지로 리다이렉트
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<br/>
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+> 시연 - (1)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<img src="https://user-images.githubusercontent.com/93233930/185748580-3742b74a-1ed1-4312-9332-2ce6b20c0530.gif"/>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+<br/>
 
-## Learn More
+> 시연 - (2)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<img src="https://user-images.githubusercontent.com/93233930/185748581-0744d1c2-8db9-4a9a-a27d-86efbb4493ad.gif"/>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<br/>
 
-### Code Splitting
+<hr/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+<h3>:: 2. 투두 리스트</h3>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+#### ☑ Assignment4
+- - [x] ```todo``` 페이지 접속 시 투두 리스트들 표시
+- - [x] 내용 및 완료 여부 표시
+- - [x] 투두 리스트 입력창 및 추가 버튼 표시
+  - - [x] 추가 버튼 클릭 시 새로운 투두 리스트 생성
+  
+<br/>
 
-### Making a Progressive Web App
+> 시연
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+<img src="https://user-images.githubusercontent.com/93233930/185748582-47fdc557-6f97-4c93-aed6-1f18c128e601.gif"/>
 
-### Advanced Configuration
+<br/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+#### ☑ Assignment5
+- - [x] 투두 리스트 수정, 삭제 기능 구현
+  - - [x] 개별 투두 리스트 우측에 수정 버튼 표시
+    - - [x] 해당 버튼 클릭 시 수정 모드 활성화 후 수정 가능하도록 구현
+  - - [x] 수정 모드인 개별 투두 리스트의 우측에 제출 버튼과 취소 버튼 표시
+    - - [x] 해당 버튼을 통해 수정 및 취소 가능하도록 구현
+  - - [x] 개별 투두 리스트 우측의 삭제 버튼 표시
+    - - [x] 해당 버튼 클릭 시 삭제가 가능하도록 구현
+    
+<br/>
 
-### Deployment
+> 시연 - (1)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+<img src="https://user-images.githubusercontent.com/93233930/185748584-7de6dcaa-d30f-4821-9bfc-7605fa4b3d77.gif"/>
 
-### `npm run build` fails to minify
+<br/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+> 시연 - (2)
+
+<img src="https://user-images.githubusercontent.com/93233930/185748585-2579e294-d923-42b4-9053-2351d077bb49.gif"/>
+
+<br/>
+    
+<hr/>
+
+<br/>
+
+# 프로젝트 실행 방법
+해당 Repository 복사
+```
+git clone https://github.com/metacode22/wanted-pre-onboarding-fe.git
+```
+
+해당 폴더에서 패키지 설치
+
+```
+npm install
+```
+
+실행
+```
+npm start
+```
+
+
