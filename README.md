@@ -10,6 +10,8 @@
   - - [x] 위 두 조건 만족 시 로그인/회원가입 버튼 활성화
   - - [x] 테스트 이메일 사용
 
+<img src="https://user-images.githubusercontent.com/93233930/185746909-639da981-ef30-4990-a93c-d62ad7790151.gif"/>
+
 #### ☑ Assignment2
 - - [x] 로그인 API 호출 후 올바른 응답 수신 시 ```/todo```로 이동
   - - [x] 로그인 성공 후 응답 받은 JWT를 로컬 스토리지에 저장
