@@ -96,7 +96,7 @@ function Register() {
                 <input
                     type='email'
                     className={styles.emailInput}
-                    id='emailInput'
+                    id='emailInputId'
                     ref={emailRef}
                     autoComplete='off'
                     onChange={(event) => {setEmailValue(event.target.value)}}
