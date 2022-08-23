@@ -117,4 +117,14 @@ npm install
 npm start
 ```
 
+<br/>
+    
+<hr/>
+
+<br/>
+
+# 회고
+<a href="https://velog.io/@metamong/%EC%9B%90%ED%8B%B0%EB%93%9C-%ED%94%84%EB%A6%AC%EC%98%A8%EB%B3%B4%EB%94%A9-%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C-%EA%B3%BC%EC%A0%9C%EB%A5%BC-%EC%A7%84%ED%96%89%ED%95%98%EB%A9%B0" target="_blank" rel="noopener noreferrer">원티드 프리온보딩 프론트엔드 과제를 진행하며</a>
+
+
 
